@@ -1,3 +1,5 @@
+
+
 package model;
 
 import java.math.BigInteger;
@@ -8,7 +10,7 @@ public class PasswordHash {
 	
 	
 // this dunction returns a hashed version of the password
-	public static String GetPasswordHash(String plainPass){
+	public static String getPasswordHash(String plainPass){
 		
 		String input = null;
 		try {
