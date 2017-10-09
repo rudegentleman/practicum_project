@@ -1,7 +1,11 @@
 <%-- 
-    Document   : admin_home
+    Document   : admin_home.jsp
     Created on : Oct 9, 2017, 9:49:47 AM
     Author     : clovis
+    Purpose    : This file is meant to be the landing page for the administrator. 
+                 It includes different pages that are essential to the administrator. These are:
+                    - admin_menu
+                    - admin_main_content
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -10,7 +14,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Dashboard</title>
+  <title> Admin | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
