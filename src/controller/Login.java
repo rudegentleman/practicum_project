@@ -14,9 +14,8 @@ import java.util.*;
 import java.security.MessageDigest;
 import java.util.Random;
 import java.text.*;
-import Database.DatabaseConnection;
+import DatabaseConnection;
 import servlet.PageError;
-import utils.UtilityMethods;
 
 /**
  * Servlet implementation class Login
