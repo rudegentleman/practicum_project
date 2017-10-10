@@ -67,7 +67,7 @@ public class DbConnection extends HttpServlet {
 		String name2= request.getParameter("name2");
 		String username= request.getParameter("name_");
 		String pw= request.getParameter("password");
-		String hash = PasswordHash.GetPasswordHash(pw);
+		String hash = PasswordHash.getPasswordHash(pw);
 
 		DatabaseConnection bd = new DatabaseConnection();
 		System.out.println(name+name2+username+pw);

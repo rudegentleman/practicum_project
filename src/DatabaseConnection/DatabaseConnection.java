@@ -20,7 +20,6 @@ public class DatabaseConnection {
 	 */
 	public DatabaseConnection() {
 		try {
-			System.out.println("hahah");
 			Class.forName("com.mysql.jdbc.Driver");
 			String db = "jdbc:mysql://localhost:3306/practicum";
 			//myConnection = DriverManager.getConnection(db, "dniwemug", "tartans");
@@ -104,6 +103,7 @@ public class DatabaseConnection {
 		public boolean login(String username,String hash){
 			String hash_ = null;
 			ResultSet mySet;
+			
 			String query ="SELECT * FROM `practicum`.`credentials` WHERE `username`= ?;";		
 	        
 			
@@ -113,11 +113,53 @@ public class DatabaseConnection {
 				mySet =statement.executeQuery();
 				
 				while(mySet.next()){
-					
-					hash = mySet.getString("Hash");
+					hash_ = mySet.getString("Hash");
 					
 				}
 				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			// closing the connection to the server
+			finally{
+				
+				try {
+					myConnection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			// checking if the credentials matches
+			return(hash.equals(hash_));
+			
+		}
+		
+		
+		// a function reads the last records of ta component and its mean
+		
+		
+		public String[] read(String ElementName){
+			//an array to hold the two readings
+			String readings[] = new String[2];
+			
+			String meanColumn= "mean_"+ElementName;
+			
+			// this will be used in the next sprint to read the 
+			String bestMean = null;
+			String query="SELECT "+ ElementName+ ", "+meanColumn +" FROM `practicum`.`credentials`";
+			
+			
+			try {
+				statement = myConnection.prepareStatement(query);
+				ResultSet mySet =statement.executeQuery();
+				System.out.println(mySet.next());
+				while(mySet.next()){
+					 readings[0] = mySet.getString(ElementName);
+					 readings[1]= mySet.getString(meanColumn);
+				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -134,11 +176,12 @@ public class DatabaseConnection {
 				}
 				
 			}
-			// checking if the credentials matches
 			
-			return(hash.equals(hash_));
+				
+		return readings;
 			
 		}
+		
 		
 		
 		
