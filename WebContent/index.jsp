@@ -180,7 +180,7 @@ footer a, footer a:link {
 
 <body>
   <div class="wrapper">
-  <form class="login" action = "Login" method="get">  
+  <form class="login" action = "Login" method="post">  
     <p class="title">RMT Admin Log in</p>
     <input type="text" placeholder="Username" autofocus name="Username" />
     <i class="fa fa-user"></i>
