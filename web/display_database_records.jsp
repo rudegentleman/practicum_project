@@ -18,7 +18,7 @@
     />
      
     <sql:query var="listUsers"   dataSource="${myDS}">
-        SELECT * FROM users;
+        SELECT * FROM element_reading;
     </sql:query>
      
     <div align="center">
@@ -27,7 +27,7 @@
 	<c:set var="i" value="0" />
 	<c:set var="color" value="${color[i]}" />
 	    <c:forEach var="record" items="${table}">
-	        <c:set var="tieId" value="${record.tie_id}" />
+	        <c:set var="tieId" value="${record.Id}" />
 	                      <c:if test="${tieId!=first_tieId}" >
 	                       <c:set var="first_tieId" value="${tieId}" />
 	                    <c:set var="color" value="${color[i+1]}" />
@@ -37,9 +37,11 @@
 	                                    </c:if>       
 	            </c:if>
 	                    <tr>
-	                      <td scope="row" bgcolor="<c:out value="${color}"/>">${record.club_name}</td>
-	                      <td scope="row" bgcolor="<c:out value="${color}"/>">${record.club_status}</td>
-	                      <td scope="row" bgcolor="<c:out value="${color}"/>">${record.timestamp}</td>
+	                      <td scope="row" bgcolor="<c:out value="${color}"/>">${record.oxygen}</td>
+	                      <td scope="row" bgcolor="<c:out value="${color}"/>">${record.carbon}</td>
+	                      <td scope="row" bgcolor="<c:out value="${color}"/>">${record.hydrogen}</td>
+	                      <td scope="row" bgcolor="<c:out value="${color}"/>">${record.temperature}</td>
+	                      <td scope="row" bgcolor="<c:out value="${color}"/>">${record.humidity}</td>
 	                   </tr>
 	    </c:forEach>
 	</table>
