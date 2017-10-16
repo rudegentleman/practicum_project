@@ -30,7 +30,8 @@ public class Element {
 	}
 	//
 	public void setError(double bestMean) {
-		error = this.meanSofar - bestMean;
+		if(bestMean!=Double.NaN)
+			error = this.meanSofar - bestMean;
 	}
 	public String getElementName() {
 		return elementName;

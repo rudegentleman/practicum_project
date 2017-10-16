@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,24 +35,38 @@ public class DataLoad extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// getting a session from login page
         HttpSession session = request.getSession();
+        // an arraylist to store all elements read
 		ArrayList<Element> elements= new ArrayList <Element>();
 		Element element;
 		String readings[] = new String[2];
 		String elementsNames [] ={"oxygen","carbon","hydrogen","temperature","humidity"};
 		DatabaseConnection db;
 		int i=0;
+		
+		// readings from data base
 		for(String elName: elementsNames){
 			db= new DatabaseConnection();
-              System.out.println(elementsNames[i]);
+              //System.out.println(elementsNames[i]);
 			readings=db.read(elementsNames[i]);
-			elements.add(new Element("oxygen",Double.valueOf(readings[0]),Double.valueOf(readings[1]),0));
+			elements.add(new Element(elementsNames[i],Double.valueOf(readings[0]),Double.valueOf(readings[1]),0));
 			i++;
 		}
+		/**
+		 * Data analytics: this part of the codes will alerts the user on the screen based on the findings
+		 * a z-score is used to check whether the mean sofar is acceptable or not based on the sample size
+		 * and the best mean.
+		 * 
+		 * */
+		// call data analytics modelue here to do z-score or t,test
 		
+		
+		// set an attributes of the readings into the session
 		session.setAttribute("elements", elements);
 		
-		RequestDispatcher rd=request.getRequestDispatcher("practicum_project/DataPortal"); 
+		// dispatching the readings to the DataPortal page to be displayed
+		RequestDispatcher rd=request.getRequestDispatcher("/Table.jsp"); 
 		rd.forward(request, response);
 
 		//response.getWriter().print(elements.get(2).getElementName());
@@ -63,7 +76,7 @@ public class DataLoad extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// redirect to doPost
 		doGet(request, response);
 	}
 

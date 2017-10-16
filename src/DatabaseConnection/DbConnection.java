@@ -39,6 +39,7 @@ public class DbConnection extends HttpServlet {
 				 +"</head>"
 				 +"<body>"
 				 +"<h2>Rgegister here</h2>"
+				 
 						+ "<form action = \"Register\" method=\"post\">"
 						+ "<br>Name <input type=\"text\" name=\"name\" value=\"\"> "
 						+ "<br>Family Name <input type=\"text\" name=\"name2\" value=\"\"> "
@@ -46,8 +47,14 @@ public class DbConnection extends HttpServlet {
 						+ "<br>Password <input type=\"password\" name=\"password\">"
 						+ "<input type=\"submit\" value=\"sign up\">"
 						+ "</body></form>"
+						
 						+"</html>"
-				);
+);
+		
+		
+		
+		
+		
 	}
 
 	/**

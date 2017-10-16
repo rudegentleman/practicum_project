@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import DatabaseConnection.DatabaseConnection;
 import model.PasswordHash;
@@ -32,7 +34,7 @@ public class Login extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		// Retrieve username and password from the login request
-		
+		HttpSession session= request.getSession(true);
 		boolean pwMatches =false;
 		String username = request.getParameter("Username");
 		String password = request.getParameter("Password");
@@ -48,7 +50,7 @@ public class Login extends HttpServlet{
 			
 			// Check user credentials entered
 			if(pwMatches){
-				response.sendRedirect("/practicum_project/admin_home.jsp");
+				response.sendRedirect("/practicum_project/DataLoad");
 			}
 			else{
 				response.sendRedirect("/practicum_project/index.jsp");

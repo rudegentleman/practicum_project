@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 public class DatabaseConnection {
@@ -149,16 +150,16 @@ public class DatabaseConnection {
 			
 			// this will be used in the next sprint to read the 
 			String bestMean = null;
-			String query="SELECT "+ ElementName+ ", "+meanColumn +" FROM `practicum`.`credentials`";
+			String query="SELECT "+ ElementName+ ", "+meanColumn +" FROM `practicum`.`my_table`";
 			
 			
 			try {
 				statement = myConnection.prepareStatement(query);
 				ResultSet mySet =statement.executeQuery();
-				System.out.println(mySet.next());
 				while(mySet.next()){
 					 readings[0] = mySet.getString(ElementName);
 					 readings[1]= mySet.getString(meanColumn);
+					 //System.out.println(Arrays.toString(readings));
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
