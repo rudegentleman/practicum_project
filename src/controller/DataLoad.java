@@ -34,12 +34,25 @@ public class DataLoad extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Not Allowed To vew This page").append(request.getContextPath());
 		// getting a session from login page
-        HttpSession session = request.getSession();
+		HttpSession session=request.getSession();
+		
+		
+		// if the visitor is not from the Login Page or the session expired. redirect to Login page
+        if (session.getAttribute("permission")==null)
+        {
+        	  String site = new String("index.jsp");
+
+              response.setStatus(response.SC_MOVED_TEMPORARILY);
+              response.setHeader("Location", site);
+    		
+        	
+        }
+        
+
         // an arraylist to store all elements read
 		ArrayList<Element> elements= new ArrayList <Element>();
-		Element element;
 		String readings[] = new String[2];
 		String elementsNames [] ={"oxygen","carbon","hydrogen","temperature","humidity"};
 		DatabaseConnection db;

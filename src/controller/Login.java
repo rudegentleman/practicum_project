@@ -35,6 +35,7 @@ public class Login extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		// Retrieve username and password from the login request
 		HttpSession session= request.getSession(true);
+		session.setAttribute("permission", true);
 		boolean pwMatches =false;
 		String username = request.getParameter("Username");
 		String password = request.getParameter("Password");
