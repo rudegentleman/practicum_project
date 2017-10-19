@@ -62,43 +62,38 @@ body {
 	<script src="js/jquery.flot.min.js"></script>
 	<script>
 		/* parsing java data from data base into javascript array for graphing */
+	<%ArrayList<Double> currMeasure = (ArrayList) request.getSession().getAttribute("currMeasures");
+			ArrayList<Double> means = (ArrayList) request.getSession().getAttribute("means");
+			System.out.println(currMeasure);
+			System.out.println(means);%>
 		
-		<%
-		
-		ArrayList <Double> currMeasure = (ArrayList) request.getSession().getAttribute("currMeasures");
-		ArrayList <Double> means = (ArrayList) request.getSession().getAttribute("means");
-        System.out.println(currMeasure);
-        System.out.println(means);
-
-			
-		%>
-	<%
-
-			double[] xCor = new double[]{1, 2, 3, 4};
+	<%double[] xCor = new double[]{1, 2, 3, 4};
 			double size = means.size();%>
-		
 		var coordinatesCurr = new Array()
 		var coordinatesMeans = new Array()
-		
-		var dataSize =<%=size%>
+
+		var dataSize =
+	<%=size%>
 		
 	<%int k = 0;%>
-	var data = <%=currMeasure%>;
-	var data2 = <%=means%>;
+		var data =
+	<%=currMeasure%>
+		;
+		var data2 =
+	<%=means%>
+		;
 
-	
 		for (i = 0; i < dataSize; i++) {
-           
+
 			coordinatesCurr[i] = []
-			coordinatesCurr[i][0] = i+1
-			
-			coordinatesCurr[i][1] =data[i];	
-			
-			
+			coordinatesCurr[i][0] = i + 1
+
+			coordinatesCurr[i][1] = data[i];
+
 			coordinatesMeans[i] = []
-			coordinatesMeans[i][0] = i+1
-			
-			coordinatesMeans[i][1] =data2[i]*4;	
+			coordinatesMeans[i][0] = i + 1
+
+			coordinatesMeans[i][1] = data2[i] * 4;
 		}
 
 		$(document)

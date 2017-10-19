@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.math3.stat.inference.TTest;
+
 
 import DatabaseConnection.DatabaseConnection;
 import model.*;
@@ -34,7 +36,7 @@ public class DataLoad extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Not Allowed To vew This page").append(request.getContextPath());
+		//response.getWriter().append("Not Allowed To vew This page").append(request.getContextPath());
 		// getting a session from login page
 		HttpSession session=request.getSession();
 		
@@ -58,12 +60,12 @@ public class DataLoad extends HttpServlet {
 		DatabaseConnection db;
 		int i=0;
 		
-		// readings from data base
+		// readings from data base and creating elements for a display
 		for(String elName: elementsNames){
 			db= new DatabaseConnection();
               //System.out.println(elementsNames[i]);
 			readings=db.read(elementsNames[i]);
-			elements.add(new Element(elementsNames[i],Double.valueOf(readings[0]),Double.valueOf(readings[1]),0));
+			elements.add(new Element(elementsNames[i],Double.valueOf(readings[0]),Double.valueOf(readings[1]),0, new double[]{0}));
 			i++;
 		}
 		/**
