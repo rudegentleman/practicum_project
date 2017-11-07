@@ -39,6 +39,7 @@ public class DataLoad extends HttpServlet {
 		//response.getWriter().append("Not Allowed To vew This page").append(request.getContextPath());
 		// getting a session from login page
 		HttpSession session=request.getSession();
+		session.setAttribute("allowed", true);
 		
 		
 		// if the visitor is not from the Login Page or the session expired. redirect to Login page
@@ -58,14 +59,20 @@ public class DataLoad extends HttpServlet {
 		String readings[] = new String[2];
 		String elementsNames [] ={"oxygen","carbon","hydrogen","temperature","humidity"};
 		DatabaseConnection db;
+		double bestMean=0;
+		
 		int i=0;
 		
 		// readings from data base and creating elements for a display
+		
 		for(String elName: elementsNames){
-			db= new DatabaseConnection();
+			 
               //System.out.println(elementsNames[i]);
-			readings=db.read(elementsNames[i]);
-			elements.add(new Element(elementsNames[i],Double.valueOf(readings[0]),Double.valueOf(readings[1]),0, new double[]{0}));
+			bestMean=  Double.parseDouble(new DatabaseConnection().bestMean("mean_"+elementsNames[i]));
+
+			readings=new DatabaseConnection().read(elementsNames[i]);
+			
+			elements.add(new Element(elementsNames[i],Double.valueOf(readings[0]),Double.valueOf(readings[1]),bestMean, new double[]{0,3,4,5,6}));
 			i++;
 		}
 		/**

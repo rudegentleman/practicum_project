@@ -40,12 +40,25 @@ body {
 </head>
 
 <body>
+<%	
 
+if(request.getSession().getAttribute("allowed")==null){
+	RequestDispatcher rd=request.getRequestDispatcher("index.jsp");  
+	//servlet2 is the url-pattern of the second servlet  
+	  
+	rd.forward(request, response);//method may be include or forward  
+      
+	
+}
+
+
+%>
 	<!-- Graph HTML -->
 	<div id="graph-wrapper">
 		<div class="graph-info">
-			<a href="javascript:void(0)" class="visitors">Visitors</a> <a
-				href="javascript:void(0)" class="returning">Returning Visitors</a> <a
+			<a href="javascript:void(0)" class="visitors">current readings</a> <a
+				href="javascript:void(0)" class="returning">mean so far</a> <a
+				href="javascript:void(0)" class="returning">best record</a> <a
 				href="#" id="bars"><span></span></a> <a href="#" id="lines"
 				class="active"><span></span></a>
 		</div>
@@ -64,6 +77,9 @@ body {
 		/* parsing java data from data base into javascript array for graphing */
 	<%ArrayList<Double> currMeasure = (ArrayList) request.getSession().getAttribute("currMeasures");
 			ArrayList<Double> means = (ArrayList) request.getSession().getAttribute("means");
+			ArrayList<Double> bestRecord = (ArrayList) request.getSession().getAttribute("bestRecord");
+			System.out.println(bestRecord);
+				
 			System.out.println(currMeasure);
 			System.out.println(means);%>
 		
@@ -71,6 +87,7 @@ body {
 			double size = means.size();%>
 		var coordinatesCurr = new Array()
 		var coordinatesMeans = new Array()
+		var bestRecord_ = new Array()
 
 		var dataSize =
 	<%=size%>
@@ -81,19 +98,23 @@ body {
 		;
 		var data2 =
 	<%=means%>
+		var data3 = <%=bestRecord%>
 		;
 
 		for (i = 0; i < dataSize; i++) {
 
-			coordinatesCurr[i] = []
+			coordinatesCurr[i] = []			
 			coordinatesCurr[i][0] = i + 1
+			bestRecord_[i] = []
+			bestRecord_[i][0] = i + 1
 
 			coordinatesCurr[i][1] = data[i];
+			bestRecord_[i][1] = data3[0];
 
 			coordinatesMeans[i] = []
 			coordinatesMeans[i][0] = i + 1
 
-			coordinatesMeans[i][1] = data2[i] * 4;
+			coordinatesMeans[i][1] = data2[i];
 		}
 
 		$(document)
@@ -102,11 +123,18 @@ body {
 
 							// Graph Data ##############################################
 							var graphData = [ {
-								// Visits
+								// instant reading
 								data : coordinatesCurr,
 								color : '#71c73e'
-							}, {
-								// Returning Visits
+							}, 
+							
+							{
+								// Best record
+								data : bestRecord_,
+								color : '#ff69b4'
+							},
+							{
+								// mean up to now
 								data : coordinatesMeans,
 								color : '#77b7c5',
 								points : {

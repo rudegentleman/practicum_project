@@ -23,6 +23,9 @@
 		e.style.display = (e.style.display == 'block') ? 'none' : 'block';
 	}
 </script>
+
+
+
 </head>
 
 <style>
@@ -32,17 +35,59 @@
 }
 </style>
 <body>
+	<%
+		if (request.getSession().getAttribute("allowed") == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+			//servlet2 is the url-pattern of the second servlet  
+
+			rd.forward(request, response);//method may be include or forward  
+
+		}
+	%>
 	<img class="rwanda_tea" src="tea.gif" alt="Loading" title="Rwanda Tea" />
+	<img src="Logo2.png" alt="Loading" title="Rwanda Tea" />
+	<img src="rmt_logo2.png" alt="Loading" title="Rwanda Tea" />
+	
 
 	<footer>
 
 		<span style="position: absolute; top: 0pt; right: 1pt;"> <a
 			target="blank" href="https://www.rwandamountaintea.com/">
 				<h2>Rwanda Mountain Tea</h2>
-		</a> <a target="blank" href="https://www.rwandamountaintea.com/">
+		</a> <a href="javascript:showhide('seBestRecord')">
 				<h4>Set new Best record</h4>
-		</a> <a target="blank" href="https://www.rwandamountaintea.com/">
+		</a>
+			<div id="seBestRecord" style="display: none;">
+				<p>follow the Data format provided</p>
+
+				<form action="SetBestRecord" method="POST">
+					<input type="date" id="myDate" name="bestDate" value="2014-30-09">
+
+					<input type="submit" value="Submit">
+
+				</form>
+				<script>
+					function myFunction() {
+						var x = document.getElementById("myDate").value;
+						document.getElementById("demo").innerHTML = x;
+					}
+				</script>
+
+
+			</div> <a href="javascript:showhide('traceBack')">
 				<h4>Trace back</h4>
+
+				<div id="traceBack" style="display: none;">
+
+					<p>follow the Data format provided</p>
+
+					<form action='' method="POST">
+						<input type="date" id="myDate" name="bestDate" value="2014-30-09">
+
+						<input type="submit" value="Submit">
+
+					</form>
+				</div>
 
 		</a> <a href="javascript:showhide('uniquename')">
 				<h4>Inspect an element</h4>
@@ -55,6 +100,7 @@
 						<option value="hydrogen">Hydrogen</option>
 						<option value="carbon">Carbon dioxide</option>
 						<option value="temperature">Temperature</option>
+						<option value="humidity">Humidity</option>
 					</select> <input type="submit" value="Submit">
 				</form>
 
@@ -85,6 +131,7 @@
 			<tbody>
 				<%
 					// retrieving the session
+
 					ArrayList<Element> elements = (ArrayList) request.getSession().getAttribute("elements");
 					Element b;
 					response.getWriter();
@@ -113,6 +160,16 @@
 							out.println(elements.get(i).getMeanSofar());
 						%>
 					</td>
+					<td>
+						<%
+							out.println(elements.get(i).getError());
+						%>
+					</td>
+					<td>
+						<%
+							out.println(elements.get(i).getWarninng());
+						%>
+					</td>
 				</tr>
 				<%
 					} else {
@@ -131,6 +188,16 @@
 					<td>
 						<%
 							out.println(elements.get(i).getMeanSofar());
+						%>
+					</td>
+					<td>
+						<%
+							out.println(elements.get(i).getError());
+						%>
+					</td>
+					<td>
+						<%
+							out.println(elements.get(i).getWarninng());
 						%>
 					</td>
 				</tr>

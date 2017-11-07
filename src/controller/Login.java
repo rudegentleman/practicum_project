@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,8 +30,25 @@ public class Login extends HttpServlet{
 	}
 	
 	/**
+	 * @throws ServletException,IOException 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
+	
+	public void sendredirect_(boolean pwMatches,HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
+		
+		
+		
+		
+		if(pwMatches){
+			System.out.println("ok");
+			response.sendRedirect("/practicum_project/DataLoad");
+		}
+		else{
+			response.sendRedirect("/practicum_project/index.jsp");
+			return;
+		}
+	};
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		// Retrieve username and password from the login request
@@ -50,13 +68,58 @@ public class Login extends HttpServlet{
 			System.out.println(pwMatches);
 			
 			// Check user credentials entered
-			if(pwMatches){
-				response.sendRedirect("/practicum_project/DataLoad");
-			}
-			else{
-				response.sendRedirect("/practicum_project/index.jsp");
-			}
+			// timer
+			Date date = new Date();
+			int start = date.getMinutes();
+			
+		//	while(true){
+			
+			//if(new Date().getMinutes()>=start){
+//			if(pwMatches){
+//				System.out.println("ok");
+//				response.sendRedirect("/practicum_project/DataLoad");
+//			}
+//			else{
+//				response.sendRedirect("/practicum_project/index.jsp");
+//				return;
+//			}
+			
+			sendredirect_(pwMatches,request,response);
+			//System.out.println("here I am ");
+			//start+=1;
+		//	}
+		//}
 		}
+		
+		
+//		Thread aThread= new Thread(){
+//			
+//			public void run(){
+//				
+//				int i=0;
+//				while(true){
+//				
+//				System.out.println(this.currentThread().getName());
+//				if(i++>100)
+//					try {
+//						sendredirect_(true, request, response);
+//					} catch (ServletException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					} catch (IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//					
+//				
+//				}
+//				
+//			}
+//			
+//		};
+//		
+//		aThread.start();
+//		
 	}
 	
 	/**

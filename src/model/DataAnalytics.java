@@ -1,5 +1,7 @@
 package model;
-import org.apache.commons.math3.stat.inference.*;
+import java.util.Arrays;
+
+import org.apache.commons.math3.stat.inference.TTest;
 
 public class DataAnalytics {
 /**
@@ -11,15 +13,18 @@ public class DataAnalytics {
  * the significance level will be lowered to 3%
  * 
  * */
+	
 
-	private  TTest atest = new TTest();
+
+
+	private  TTest aTest = new TTest();
 
 
 	// this function do a test to decide whether the parameters are in the right dimensions
 	public  double ttestToBestMean(double sample[], double bestMean){
+           System.out.println("kkkkkk"+Arrays.toString(sample));
 
-
-		return atest.tTest(bestMean,sample);
+		return aTest.tTest(bestMean,sample);
 	}
 
 
