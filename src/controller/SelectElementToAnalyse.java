@@ -2,8 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DatabaseConnection.DatabaseConnection;
-import model.Element;
 
 /**
  * Servlet implementation class SelectElementToAnalyse
@@ -47,8 +44,9 @@ public class SelectElementToAnalyse extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		DatabaseConnection db = new DatabaseConnection();
+		String anElement = request.getParameter("elements");
 		
-		ArrayList<ArrayList>anElemnt = db.inspect(request.getParameter("elements"));
+		ArrayList<ArrayList>anElemnt = db.inspect(anElement);
 		ArrayList <String> element = anElemnt.get(0);
 		ArrayList <String> means = anElemnt.get(1);
 		ArrayList <String> bestRecord = anElemnt.get(2);
@@ -58,7 +56,7 @@ public class SelectElementToAnalyse extends HttpServlet {
 		//ArrayList <String> element = new ArrayList<>(Arrays.asList(anElemnt));
 
 		int i=0;
-		for(String elemnt: element){
+		for(String elemnt: element){// for all elements
 			if(null!=elemnt){
 				element_.add(elemnt);
 				means_.add(means.get(i++));

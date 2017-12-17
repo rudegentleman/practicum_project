@@ -56,9 +56,9 @@ if(request.getSession().getAttribute("allowed")==null){
 	<!-- Graph HTML -->
 	<div id="graph-wrapper">
 		<div class="graph-info">
-			<a href="javascript:void(0)" class="visitors">current readings</a> <a
-				href="javascript:void(0)" class="returning">mean so far</a> <a
-				href="javascript:void(0)" class="returning">best record</a> <a
+			<a href="javascript:void(0)" class="visitors">Current Readings</a> <a
+				href="javascript:void(0)" class="returning">Mean so Far</a> <a
+				href="javascript:void(0)" class="returning">Best record</a> <a
 				href="#" id="bars"><span></span></a> <a href="#" id="lines"
 				class="active"><span></span></a>
 		</div>
@@ -83,7 +83,7 @@ if(request.getSession().getAttribute("allowed")==null){
 			System.out.println(currMeasure);
 			System.out.println(means);%>
 		
-	<%double[] xCor = new double[]{1, 2, 3, 4};
+	<%double[] xCor = new double[]{1, 2, 3, 4}; 
 			double size = means.size();%>
 		var coordinatesCurr = new Array()
 		var coordinatesMeans = new Array()

@@ -61,35 +61,30 @@
 				<p>follow the Data format provided</p>
 
 				<form action="SetBestRecord" method="POST">
-					<input type="date" id="myDate" name="bestDate" value="2014-30-09">
+					<input type="date" id="myDate" name="bestDate">
 
 					<input type="submit" value="Submit">
 
 				</form>
-				<script>
-					function myFunction() {
-						var x = document.getElementById("myDate").value;
-						document.getElementById("demo").innerHTML = x;
-					}
-				</script>
+			
 
 
 			</div> <a href="javascript:showhide('traceBack')">
 				<h4>Trace back</h4>
-
+             </a>
 				<div id="traceBack" style="display: none;">
 
 					<p>follow the Data format provided</p>
 
-					<form action='' method="POST">
-						<input type="date" id="myDate" name="bestDate" value="2014-30-09">
+					<form action='TraceBack' method="POST">
+						<input type="date" id="myDate" name="tracedDate">
 
 						<input type="submit" value="Submit">
 
 					</form>
 				</div>
 
-		</a> <a href="javascript:showhide('uniquename')">
+		<a href="javascript:showhide('uniquename')">
 				<h4>Inspect an element</h4>
 		</a>
 
@@ -138,7 +133,7 @@
 					String h[] = { "info", "warning", "active", "danger" };
 					int i = 0;
 					for (Element sensoredElmnt : elements) {
-						if (sensoredElmnt.getElementName().equals("oxygen")) {
+						if (sensoredElmnt.getWarninng().contains("is in")) {
 				%>
 
 

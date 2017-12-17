@@ -7,7 +7,7 @@ public class DataAnalytics {
 /**
  * this student t test is a one sample
  * It compares the expected mean(Best) mean with the samples recorded
- * the null hypothesis is : " The samples exactly of the same mean as the expected mean"
+ * the null hypothesis is : " The samples is exactly of the same mean as the expected mean"
  * the sample will be passed to the function together with the Best mean.
  * Because tea quality is too sensitive to the change in chemical quantity slight variation
  * the significance level will be lowered to 3%
@@ -22,7 +22,6 @@ public class DataAnalytics {
 
 	// this function do a test to decide whether the parameters are in the right dimensions
 	public  double ttestToBestMean(double sample[], double bestMean){
-           System.out.println("kkkkkk"+Arrays.toString(sample));
 
 		return aTest.tTest(bestMean,sample);
 	}

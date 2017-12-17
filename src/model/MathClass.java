@@ -13,7 +13,7 @@ public class MathClass {
 	public static double dailyMean(double currReading, double currMean, int numOfreadings){
 
 
-		return currMean+(currReading/(1+numOfreadings));
+		return (currMean*numOfreadings+currReading)/(1+numOfreadings);
 	}
 	
 	
@@ -38,6 +38,39 @@ public class MathClass {
 		
 		
 		return average;
+		
+	}
+	
+	public static double min(ArrayList<String> elements){
+		double min=10000;
+		double currEl=0;
+		
+		for(String elt:elements){
+			
+			if((currEl=Double.parseDouble(elt))<min)
+				min=currEl;
+			
+		}
+		
+		
+		return min;	
+		
+		
+	}
+	
+	public static double max(ArrayList<String> elements){
+		double max=0;
+		double currEl=0;
+		
+		for(String elt:elements){
+			
+			if((currEl=Double.parseDouble(elt))>max)
+				max=currEl;
+			
+		}
+		
+		return max;	
+		
 		
 	}
 

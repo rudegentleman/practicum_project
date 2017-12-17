@@ -1,17 +1,19 @@
 package model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import DatabaseConnection.DatabaseConnection;
 
 public class Test {
 	
 	public static void main(String [] argv){
 		
-		
-		
-		DatabaseConnection bd = new DatabaseConnection();
-		
-		bd.read("name");
-		
+				Date currDate = new Date();	
+
+				  String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(currDate);
+
+		System.out.println(timeStamp);
 		
 	}
 
